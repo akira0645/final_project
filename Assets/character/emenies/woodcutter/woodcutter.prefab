@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 4659880053458783549}
   - component: {fileID: 1713077838929381017}
   - component: {fileID: 2076927646288456797}
-  m_Layer: 0
+  - component: {fileID: 6835847970157436571}
+  - component: {fileID: 8553301550815135681}
+  m_Layer: 8
   m_Name: woodcutter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,3 +163,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4478af9fc76982e4a86ddf2a46a01371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 9
+--- !u!114 &6835847970157436571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7373502075669433028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d7bf2a3a26cf8e4c9b8576ded5c8968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundDistance: 0.05
+  wallDistance: 0.000001
+  ceilingDistance: 0.05
+  castFilter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  touchingCol: {fileID: 0}
+  _isGrounded: 0
+  _isOnwall: 0
+  _isOnCeiling: 0
+--- !u!95 &8553301550815135681
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7373502075669433028}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2cc31e8f78c78944984d28973df6f177, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

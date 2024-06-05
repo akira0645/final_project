@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 55728064}
   - component: {fileID: 55728063}
   - component: {fileID: 55728062}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap_more
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5469,7 +5469,7 @@ GameObject:
   - component: {fileID: 246650409}
   - component: {fileID: 246650408}
   - component: {fileID: 246650407}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap_behind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6045,7 +6045,7 @@ GameObject:
   - component: {fileID: 613106544}
   - component: {fileID: 613106543}
   - component: {fileID: 613106542}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap_behind_no
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7763,7 +7763,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000a376b64bf159a41cbd247270bb803a189537ec768581a835c34a0af5b7531474
+  m_ApplyToSortingLayers: 00000000a376b64b8581a835b7531474
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -8133,7 +8133,7 @@ GameObject:
   - component: {fileID: 1317353815}
   - component: {fileID: 1317353814}
   - component: {fileID: 1317353813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11854,7 +11854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1360389169}
   - component: {fileID: 1360389168}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12006,7 +12006,7 @@ GameObject:
   - component: {fileID: 1671219494}
   - component: {fileID: 1671219493}
   - component: {fileID: 1671219492}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap_more_no
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12334,13 +12334,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1475430168613998368, guid: b9d2e9b03fff442419d5497efd30c3a1, type: 3}
+      propertyPath: castFilter.layerMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1527793007249750695, guid: b9d2e9b03fff442419d5497efd30c3a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.74
+      value: -5.6
       objectReference: {fileID: 0}
     - target: {fileID: 1527793007249750695, guid: b9d2e9b03fff442419d5497efd30c3a1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.08
+      value: -2.9
       objectReference: {fileID: 0}
     - target: {fileID: 1527793007249750695, guid: b9d2e9b03fff442419d5497efd30c3a1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12377,6 +12381,10 @@ PrefabInstance:
     - target: {fileID: 7373502075669433028, guid: b9d2e9b03fff442419d5497efd30c3a1, type: 3}
       propertyPath: m_Name
       value: woodcutter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373502075669433028, guid: b9d2e9b03fff442419d5497efd30c3a1, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
