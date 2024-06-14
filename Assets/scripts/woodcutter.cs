@@ -19,8 +19,9 @@ public class woodcutter : MonoBehaviour
         set {
             if (_walkDirection != value)
             {
-                gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x*-1, gameObject.transform.localScale.y);
-                if(value==WalkableDirection.Right)
+                //gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x*-1, gameObject.transform.localScale.y);
+                transform.Rotate(0f, 180f, 0f);
+                if (value==WalkableDirection.Right)
                 {
                     WalkDirectionVector = Vector2.right;
                 }else if(value == WalkableDirection.Left)

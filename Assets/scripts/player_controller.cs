@@ -11,6 +11,7 @@ public class player_controller : MonoBehaviour
     public float walkSpeed = 5f;
     public float runSpeed = 9f;
     public float jumpImpuse=7f;
+    public int jumpnum = 0;
     Vector2 moveInput;
     TouchingSpaceDirection touchingSpaceDirection;
 
@@ -95,6 +96,14 @@ public class player_controller : MonoBehaviour
         }
     }
 
+    public bool IsAlive 
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.isAlive);
+        }
+    }
+
     Rigidbody2D rb;
     Animator animator;
 
@@ -126,10 +135,16 @@ public class player_controller : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+        if (IsAlive)
+        {
+            IsMoving = moveInput != Vector2.zero;
 
-        IsMoving = moveInput != Vector2.zero;
-
-        SetFacingDirection(moveInput);
+            SetFacingDirection(moveInput);
+        }
+        else
+        {
+            IsMoving = false;
+        }
     }
 
     private void SetFacingDirection(Vector2 moveInput)
@@ -158,9 +173,25 @@ public class player_controller : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        //check if alive
+        //check if alive 
+        /*if (context.started &&touchingSpaceDirection.IsGrounded &&CanMove)
+         * if (context.started &&touchingSpaceDirection.IsGrounded &&CanMove)
+        {
+            jumpnum = 0;
+            animator.SetTrigger(AnimationStrings.jumpTrigger);
+            rb.velocity = new Vector2(rb.velocity.x, jumpImpuse);
+        }
+         */
+        //¤G¬q¸õ
         if (context.started &&touchingSpaceDirection.IsGrounded &&CanMove)
         {
+            jumpnum = 0;
+            animator.SetTrigger(AnimationStrings.jumpTrigger);
+            rb.velocity = new Vector2(rb.velocity.x, jumpImpuse);
+        }
+        if (context.started && !touchingSpaceDirection.IsGrounded && jumpnum!=1)
+        {
+            jumpnum++;
             animator.SetTrigger(AnimationStrings.jumpTrigger);
             rb.velocity = new Vector2(rb.velocity.x, jumpImpuse);
         }

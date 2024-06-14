@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f135177b8ff6f8b469136a8f966bcb83
+guid: cc3f224deda01084f99f7bf210a2be97
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Decors_0
+      name: woodcutter_standby_0
       rect:
         serializedVersion: 2
-        x: 17
+        x: 1
         y: 0
-        width: 73
-        height: 100
+        width: 30
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09231995f089e4d4e811bf4ca486402a
-      internalID: -1050260493
+      spriteID: 4ee943956f5746d449e4ab7505d0cb5d
+      internalID: -1859804986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Decors_1
+      name: woodcutter_standby_1
       rect:
         serializedVersion: 2
-        x: 114
+        x: 40
         y: 0
-        width: 35
-        height: 16
+        width: 23
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb4d1d9d5c112ca40bf7d7e09ad3bc08
-      internalID: -1130598942
+      spriteID: 61a9173977103cf429d1917187e1b24e
+      internalID: -1690387869
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Decors_2
+      name: woodcutter_standby_2
       rect:
         serializedVersion: 2
-        x: 177
+        x: 73
         y: 0
-        width: 27
-        height: 20
+        width: 44
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee567134680d2cf4794110e9a888f62c
-      internalID: 306836753
+      spriteID: e421604c8093e174ab50574209c30e61
+      internalID: 856156988
       vertices: []
       indices: 
       edges: []
@@ -170,9 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Decors_0: -1050260493
-      Decors_1: -1130598942
-      Decors_2: 306836753
+      woodcutter_standby_0: -1859804986
+      woodcutter_standby_1: -1690387869
+      woodcutter_standby_2: 856156988
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
