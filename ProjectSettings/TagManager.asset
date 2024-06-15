@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - wc1
+  - wc2
+  - wood
+  - stone
   layers:
   - Default
   - TransparentFX

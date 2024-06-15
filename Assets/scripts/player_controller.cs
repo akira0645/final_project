@@ -14,6 +14,9 @@ public class player_controller : MonoBehaviour
     public int jumpnum = 0;
     Vector2 moveInput;
     TouchingSpaceDirection touchingSpaceDirection;
+    Damageable damageable;
+    public GameObject woodPrefab;
+    public GameObject stonePrefab;
 
     public float CuttentMoveSpeed { 
         get
@@ -80,10 +83,10 @@ public class player_controller : MonoBehaviour
         }
         private set
         {
-            if(_IsFacingRight!=value)
+            /*if(_IsFacingRight!=value)
             {//flip
                 transform.Rotate(0f, 180f, 0f);
-            }
+            }*/
             _IsFacingRight = value;
         }
     }
@@ -111,6 +114,7 @@ public class player_controller : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        damageable=GetComponent<Damageable>();
         touchingSpaceDirection = GetComponent<TouchingSpaceDirection>();
     }
 
@@ -152,10 +156,12 @@ public class player_controller : MonoBehaviour
         if(moveInput.x>0 && !IsFacingRight)
         {//foward
             IsFacingRight = true;
+            GetComponent<SpriteRenderer>().flipX = false;
         }
         else if(moveInput.x<0 && IsFacingRight)
         {//flip
             IsFacingRight = false;
+            GetComponent<SpriteRenderer>().flipX = true;
         }
     }
 
@@ -197,11 +203,52 @@ public class player_controller : MonoBehaviour
         }
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
+    public void OnAttack01(InputAction.CallbackContext context)
     {
         if(context.started)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
+            if (IsFacingRight)
+            {
+                woodPrefab.GetComponent<SpriteRenderer>().flipX = false;
+            }
+            else
+            {
+                woodPrefab.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            Instantiate(woodPrefab, this.transform.position, Quaternion.identity);
         }
     }
+    public void OnAttack02(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (IsFacingRight)
+            {
+                stonePrefab.GetComponent<SpriteRenderer>().flipX = false;
+            }
+            else
+            {
+                stonePrefab.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            animator.SetTrigger(AnimationStrings.attackTrigger);
+            Instantiate(stonePrefab, this.transform.position, Quaternion.identity);
+        }
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "wc1")
+        {
+            print(collision.gameObject.name);
+            //collision.gameObject.SendMessage("Apply", 10);
+            damageable.Hit(10);
+        }
+        if (collision.gameObject.tag == "wc2")
+        {
+            print(collision.gameObject.name);
+            //collision.gameObject.SendMessage("Apply", 10);
+            damageable.Hit(10);
+        }
+    }
+
 }

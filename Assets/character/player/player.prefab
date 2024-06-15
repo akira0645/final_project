@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2776894323766198836
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2047339442181475365}
-  m_Layer: 0
-  m_Name: attack
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2047339442181475365
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2776894323766198836}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5008831, y: -0.049597204, z: -0.003305052}
-  m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9223261337979632965}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7045442086667721960
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,8 +36,7 @@ Transform:
   m_LocalPosition: {x: -2.0177145, y: -3.2859743, z: 0.048180774}
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2047339442181475365}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4236602921859361156
@@ -166,6 +134,8 @@ MonoBehaviour:
   runSpeed: 9
   jumpImpuse: 10
   jumpnum: 0
+  woodPrefab: {fileID: 812177657230838655, guid: 6ad188cd9c4e61e4093d8aee9e3699cd, type: 3}
+  stonePrefab: {fileID: 4559676399289217106, guid: dbad57fa41037ad47b2f3fd18adde6b2, type: 3}
   _isMoving: 0
   _isRunning: 0
   _IsFacingRight: 1
@@ -218,7 +188,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8373118562162421206}
         m_TargetAssemblyTypeName: player_controller, Assembly-CSharp
-        m_MethodName: OnAttack
+        m_MethodName: OnAttack01
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -302,6 +272,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7cb3e0b8-9017-4136-8064-61c1ad592e90
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8373118562162421206}
+        m_TargetAssemblyTypeName: player_controller, Assembly-CSharp
+        m_MethodName: OnAttack02
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 04d6d29b-77d1-46f5-beb5-405fec6eca1d
+    m_ActionName: Player/Attack(rock)[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

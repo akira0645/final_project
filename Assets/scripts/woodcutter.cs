@@ -13,6 +13,7 @@ public class woodcutter : MonoBehaviour
     private WalkableDirection  _walkDirection;
     private Vector2 WalkDirectionVector=Vector2.right;
     TouchingSpaceDirection touchingSpaceDirections;
+    Damageable damageable;
     public WalkableDirection WalkDirection
     {
         get { return _walkDirection; }                                                                     
@@ -37,6 +38,7 @@ public class woodcutter : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        damageable = GetComponent<Damageable>();
         touchingSpaceDirections = GetComponent<TouchingSpaceDirection>();
     }
     private void FixedUpdate()
@@ -73,5 +75,20 @@ public class woodcutter : MonoBehaviour
     void Update()
     {
         
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "wood")
+        {
+            print("WC"+collision.gameObject.name);
+            damageable.Hit(20);
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "stone")
+        {
+            print("WC" + collision.gameObject.name);
+            damageable.Hit(50);
+            Destroy(collision.gameObject);
+        }
     }
 }

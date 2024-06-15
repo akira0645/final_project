@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Damageable : MonoBehaviour
 {
@@ -78,6 +79,7 @@ public class Damageable : MonoBehaviour
         {
             Health-=Damage;
             isInvincible = true;
+            Debug.Log("Health:" + Health);
         }
     }
 }
