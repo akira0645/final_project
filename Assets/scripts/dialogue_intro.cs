@@ -9,9 +9,9 @@ public class gameplay : MonoBehaviour
     FlowerSystem fs;
     void Start()
     {
-        fs = FlowerManager.Instance.CreateFlowerSystem("default", false);
+        fs = FlowerManager.Instance.CreateFlowerSystem("default");
         fs.SetupDialog();
-        fs.ReadTextFromResource("intro2");
+        fs.ReadTextFromResource("dialogue_intro");
     }
 
     // Update is called once per frame
