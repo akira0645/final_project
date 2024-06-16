@@ -82,4 +82,9 @@ public class Damageable : MonoBehaviour
             Debug.Log("Health:" + Health);
         }
     }
+    public void SetHealth(int blood)
+    {
+        MaxHealth=blood;
+        Health= MaxHealth;
+    }
 }

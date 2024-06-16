@@ -14,6 +14,9 @@ public class woodcutter : MonoBehaviour
     private Vector2 WalkDirectionVector=Vector2.right;
     TouchingSpaceDirection touchingSpaceDirections;
     Damageable damageable;
+    public GameObject hp_bar_bg;
+    public GameObject hp_bar;
+    public int max_hp=100;
     public WalkableDirection WalkDirection
     {
         get { return _walkDirection; }                                                                     
@@ -21,12 +24,14 @@ public class woodcutter : MonoBehaviour
             if (_walkDirection != value)
             {
                 //gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x*-1, gameObject.transform.localScale.y);
-                transform.Rotate(0f, 180f, 0f);
+                //transform.Rotate(0f, 180f, 0f);
                 if (value==WalkableDirection.Right)
                 {
+                    GetComponent<SpriteRenderer>().flipX = true;
                     WalkDirectionVector = Vector2.right;
                 }else if(value == WalkableDirection.Left)
                 {
+                    GetComponent<SpriteRenderer>().flipX = false;
                     WalkDirectionVector = Vector2.left;
                 }
 
@@ -40,7 +45,7 @@ public class woodcutter : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         damageable = GetComponent<Damageable>();
         touchingSpaceDirections = GetComponent<TouchingSpaceDirection>();
-    }
+}
     private void FixedUpdate()
     {
         if(touchingSpaceDirections.IsOnWall&& touchingSpaceDirections.IsGrounded)
@@ -68,25 +73,28 @@ public class woodcutter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        damageable.SetHealth(max_hp);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        hp_bar_bg.GetComponent<SpriteRenderer>().flipX = false;
+        float pre = ((float)damageable.Health / (float)damageable.MaxHealth);
+        hp_bar_bg.transform.localScale = new Vector3(pre, hp_bar_bg.transform.localScale.y, hp_bar_bg.transform.localScale.z);
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "wood")
         {
-            print("WC"+collision.gameObject.name);
+            float pre = ((float)damageable.Health / (float)damageable.MaxHealth);
+            print("WC"+ pre);
             damageable.Hit(20);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "stone")
         {
-            print("WC" + collision.gameObject.name);
+            print("WC" + damageable.Health);
             damageable.Hit(50);
             Destroy(collision.gameObject);
         }
