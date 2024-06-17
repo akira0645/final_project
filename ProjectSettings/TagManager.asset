@@ -8,6 +8,9 @@ TagManager:
   - wc2
   - wood
   - stone
+  - food
+  - ammo_stone
+  - ammo_wood
   layers:
   - Default
   - TransparentFX

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 //player need to have rb
 [RequireComponent(typeof(Rigidbody2D),typeof(TouchingSpaceDirection))]
@@ -17,6 +18,11 @@ public class player_controller : MonoBehaviour
     Damageable damageable;
     public GameObject woodPrefab;
     public GameObject stonePrefab;
+    public GameObject hp_bar;
+    public int ammo_wood;
+    public int ammo_stone;
+    public Text woods;
+    public Text stones;
 
     public float CuttentMoveSpeed { 
         get
@@ -131,8 +137,11 @@ public class player_controller : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        woods.text =""+ ammo_wood;
+        stones.text =""+ ammo_stone;
+        float pre = ((float)damageable.Health / (float)damageable.MaxHealth);
+        hp_bar.transform.localScale = new Vector3(pre, hp_bar.transform.localScale.y, hp_bar.transform.localScale.z);
         rb.velocity = new Vector2(moveInput.x * CuttentMoveSpeed, rb.velocity.y);
-
         animator.SetFloat(AnimationStrings.yVelocity, rb.velocity.y);
     }
 
@@ -205,7 +214,7 @@ public class player_controller : MonoBehaviour
 
     public void OnAttack01(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if(context.started&&ammo_wood>0)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
             if (IsFacingRight)
@@ -216,12 +225,13 @@ public class player_controller : MonoBehaviour
             {
                 woodPrefab.GetComponent<SpriteRenderer>().flipX = true;
             }
+            ammo_wood--;
             Instantiate(woodPrefab, this.transform.position, Quaternion.identity);
         }
     }
     public void OnAttack02(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started&&ammo_stone>0)
         {
             if (IsFacingRight)
             {
@@ -232,6 +242,7 @@ public class player_controller : MonoBehaviour
                 stonePrefab.GetComponent<SpriteRenderer>().flipX = true;
             }
             animator.SetTrigger(AnimationStrings.attackTrigger);
+            ammo_stone--;
             Instantiate(stonePrefab, this.transform.position, Quaternion.identity);
         }
     }
@@ -248,6 +259,35 @@ public class player_controller : MonoBehaviour
             print(collision.gameObject.name);
             //collision.gameObject.SendMessage("Apply", 10);
             damageable.Hit(10);
+        }
+        if (collision.gameObject.tag == "food")
+        {
+            print(collision.gameObject.name);
+            int totalHealth = damageable.Health+25;
+            if (totalHealth< damageable.MaxHealth)
+            {
+                damageable.SetHealth(totalHealth);
+            }
+            else
+            {
+                print("healthFull");
+            }
+            Destroy(collision.gameObject);
+            //collision.gameObject.SendMessage("Apply", 10);
+        }
+        if (collision.gameObject.tag == "ammo_wood")
+        {
+            print(collision.gameObject.name);
+            ammo_wood+=5;
+            Destroy(collision.gameObject);
+            //collision.gameObject.SendMessage("Apply", 10);
+        }
+        if (collision.gameObject.tag == "ammo_stone")
+        {
+            print(collision.gameObject.name);
+            ammo_stone+=5;
+            Destroy(collision.gameObject);
+            //collision.gameObject.SendMessage("Apply", 10);
         }
     }
 

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8793495206051297798}
   - component: {fileID: 8783797047818225576}
   - component: {fileID: 2187730317955935001}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,6 +136,7 @@ MonoBehaviour:
   jumpnum: 0
   woodPrefab: {fileID: 812177657230838655, guid: 6ad188cd9c4e61e4093d8aee9e3699cd, type: 3}
   stonePrefab: {fileID: 4559676399289217106, guid: dbad57fa41037ad47b2f3fd18adde6b2, type: 3}
+  hp_bar: {fileID: 0}
   _isMoving: 0
   _isRunning: 0
   _IsFacingRight: 1
