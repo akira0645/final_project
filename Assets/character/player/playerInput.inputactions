@@ -283,11 +283,33 @@
                 },
                 {
                     "name": "",
+                    "id": "103627cb-b3a2-4a4f-83da-54505a84a13a",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack(wood)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b3f12b93-56c3-4192-bae1-c387f48c61b1",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Attack(rock)",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1896be14-be0b-49b8-9b56-ac6cdbf6fcb9",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Attack(rock)",
                     "isComposite": false,
                     "isPartOfComposite": false

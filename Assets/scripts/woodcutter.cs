@@ -17,6 +17,7 @@ public class woodcutter : MonoBehaviour
     public GameObject hp_bar_bg;
     public GameObject hp_bar;
     public int max_hp=100;
+    Animator animator;
     public WalkableDirection WalkDirection
     {
         get { return _walkDirection; }                                                                     
@@ -44,6 +45,7 @@ public class woodcutter : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         damageable = GetComponent<Damageable>();
+        animator = GetComponent<Animator>();
         touchingSpaceDirections = GetComponent<TouchingSpaceDirection>();
 }
     private void FixedUpdate()
@@ -97,6 +99,26 @@ public class woodcutter : MonoBehaviour
             print("WC" + damageable.Health);
             damageable.Hit(50);
             Destroy(collision.gameObject);
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(gameObject.tag=="wc1")
+        {
+            if (collision.contacts[0].normal.x == -1 && !touchingSpaceDirections.TestingIsCelling(-3f) && (collision.gameObject.tag != "food") && (collision.gameObject.tag != "ammo_wood") && (collision.gameObject.tag != "ammo_stone"))
+            {
+                this.transform.position = new Vector3(transform.gameObject.transform.position.x - 3f, transform.position.y, transform.position.z);
+            }
+            else if (collision.contacts[0].normal.x == 1 && !touchingSpaceDirections.TestingIsCelling(+3f) && (collision.gameObject.tag != "food") && (collision.gameObject.tag != "ammo_wood") && (collision.gameObject.tag != "ammo_stone"))
+            {
+                this.transform.position = new Vector3(transform.gameObject.transform.position.x + 3f, transform.position.y, transform.position.z);
+            }
+            /*else if (collision.contacts[0].normal.y==-1 && (collision.gameObject.tag == "player") )
+            {
+                damageable.Hit(damageable.MaxHealth/2);
+                print(collision.contacts[0].normal.y + "YYYYYYYYYYYYYYYYYYYY"+ damageable.MaxHealth / 2);
+            }*/
         }
     }
 }

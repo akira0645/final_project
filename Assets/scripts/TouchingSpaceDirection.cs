@@ -79,4 +79,8 @@ public class TouchingSpaceDirection : MonoBehaviour
         IsOnWall = touchingCol.Cast(wallCheckDirection, castFilter, wallHits, wallDistance) > 0;
         IsOnCeiling = touchingCol.Cast(Vector2.up, castFilter, ceilingHits, ceilingDistance) > 0;
     }
+    public bool TestingIsCelling(float d)
+    {
+        return (touchingCol.Cast(wallCheckDirection, castFilter, wallHits, wallDistance+d) > 0);
+    }
 }

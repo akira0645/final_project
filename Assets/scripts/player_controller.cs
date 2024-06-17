@@ -248,21 +248,85 @@ public class player_controller : MonoBehaviour
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "wc1")
+        //enemy
+        if(collision.contacts[0].normal.x == -1 && (collision.gameObject.tag == "wc1" || collision.gameObject.tag == "wc2"))//left
         {
-            print(collision.gameObject.name);
-            //collision.gameObject.SendMessage("Apply", 10);
-            damageable.Hit(10);
+            if (collision.gameObject.tag == "wc1")
+            {
+                print(collision.gameObject.name);
+                //collision.gameObject.SendMessage("Apply", 10);
+                damageable.Hit(10);
+                if (!touchingSpaceDirection.IsOnWall && !touchingSpaceDirection.TestingIsCelling(-2f))
+                {
+                    this.transform.position = new Vector3(transform.gameObject.transform.position.x - 2f, transform.position.y, transform.position.z);
+                    // rb.AddForce(new Vector2(50, 50));
+                }
+            }
+            if (collision.gameObject.tag == "wc2")
+            {
+                print(collision.gameObject.name);
+                //collision.gameObject.SendMessage("Apply", 10);
+                damageable.Hit(20);
+                if (!touchingSpaceDirection.IsOnWall && !touchingSpaceDirection.TestingIsCelling(-2.5f))
+                {
+                    this.transform.position = new Vector3(transform.gameObject.transform.position.x - 2.5f, transform.position.y, transform.position.z);
+                    // rb.AddForce(new Vector2(50, 50));
+                }
+            }
+            animator.SetTrigger("hurt");
         }
-        if (collision.gameObject.tag == "wc2")
+        else if (collision.contacts[0].normal.x == 1&& (collision.gameObject.tag=="wc1"|| collision.gameObject.tag=="wc2"))//right
         {
-            print(collision.gameObject.name);
-            //collision.gameObject.SendMessage("Apply", 10);
-            damageable.Hit(10);
+            if (collision.gameObject.tag == "wc1")
+            {
+                print(collision.gameObject.name);
+                //collision.gameObject.SendMessage("Apply", 10);
+                damageable.Hit(10);
+                if (!touchingSpaceDirection.IsOnWall && !touchingSpaceDirection.TestingIsCelling(2f))
+                {
+                    this.transform.position = new Vector3(transform.gameObject.transform.position.x + 2f, transform.position.y, transform.position.z);
+                    //rb.AddForce(new Vector2(50, 0));
+                }
+            }
+            if (collision.gameObject.tag == "wc2")
+            {
+                print(collision.gameObject.name);
+                //collision.gameObject.SendMessage("Apply", 10);
+                damageable.Hit(20);
+
+                if (!touchingSpaceDirection.IsOnWall && !touchingSpaceDirection.TestingIsCelling(2.5f))
+                {
+                    this.transform.position = new Vector3(transform.gameObject.transform.position.x + 2.5f, transform.position.y, transform.position.z);
+                    //rb.AddForce(new Vector2(50, 0));
+                }
+            }
+            animator.SetTrigger("hurt");
         }
+        else if(collision.contacts[0].normal.y >0)
+        {
+            if (collision.gameObject.tag == "wc1")
+            {
+                print(collision.gameObject.name);
+                //collision.gameObject.SendMessage("Apply", 10);
+                damageable.Hit(5);
+                //print(collision.contacts[0].normal.y+"YYYYYYYYYYYYYYYYYYYY");
+                animator.SetTrigger("hurt");
+            }
+            if (collision.gameObject.tag == "wc2")
+            {
+                print(collision.gameObject.name);
+                //collision.gameObject.SendMessage("Apply", 10);
+                damageable.Hit(5);
+                animator.SetTrigger("hurt");
+            }
+        }
+
+
+        //other
         if (collision.gameObject.tag == "food")
         {
             print(collision.gameObject.name);
+            animator.SetTrigger("getRecover");
             int totalHealth = damageable.Health+25;
             if (totalHealth< damageable.MaxHealth)
             {
@@ -279,6 +343,7 @@ public class player_controller : MonoBehaviour
         {
             print(collision.gameObject.name);
             ammo_wood+=5;
+            animator.SetTrigger("getAmmo");
             Destroy(collision.gameObject);
             //collision.gameObject.SendMessage("Apply", 10);
         }
@@ -286,6 +351,7 @@ public class player_controller : MonoBehaviour
         {
             print(collision.gameObject.name);
             ammo_stone+=5;
+            animator.SetTrigger("getAmmo");
             Destroy(collision.gameObject);
             //collision.gameObject.SendMessage("Apply", 10);
         }

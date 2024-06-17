@@ -11,6 +11,7 @@ TagManager:
   - food
   - ammo_stone
   - ammo_wood
+  - player
   layers:
   - Default
   - TransparentFX
