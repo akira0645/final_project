@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Flower;
 using UnityEngine.SceneManagement;
+using System;
 
 public class BossIntro : MonoBehaviour
 {
@@ -10,11 +11,17 @@ public class BossIntro : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fs = FlowerManager.Instance.CreateFlowerSystem("default", false);
+        try
+        {
+            fs = FlowerManager.Instance.GetFlowerSystem("default");
+        }
+        catch (Exception e)
+        {
+            fs = FlowerManager.Instance.CreateFlowerSystem("default", false);
+        }
         fs.SetupDialog();
         fs.ReadTextFromResource("boss_battle_intro");
         fs.RegisterCommand("load_scene", (List<string> _params) => {
-            player_controller.
             SceneManager.LoadScene(_params[0]);
         });
     }

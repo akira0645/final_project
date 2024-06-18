@@ -134,7 +134,7 @@ public class player_controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
@@ -415,8 +415,9 @@ public class player_controller : MonoBehaviour
         print("ryyy");
         if(collision.gameObject.tag =="portal")
         {
-            //collision.gameObject.transform.GetComponent<Transsport>().ChangeScene("BossIntro");
-            SceneManager.LoadScene("BossIntro");
+            //SceneManager.LoadScene("BossIntro");
+            collision.gameObject.transform.GetComponent<Transsport>().ChangeScene("BossIntro");
+            Destroy(this.gameObject);
         }
     }
 }
