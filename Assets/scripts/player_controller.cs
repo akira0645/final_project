@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 //player need to have rb
-[RequireComponent(typeof(Rigidbody2D),typeof(TouchingSpaceDirection))]
+[RequireComponent(typeof(Rigidbody2D),typeof(TouchingSpaceDirection),typeof(AudioSource))]
 
 public class player_controller : MonoBehaviour
 {
@@ -23,6 +23,10 @@ public class player_controller : MonoBehaviour
     public int ammo_stone;
     public Text woods;
     public Text stones;
+    public AudioClip SE_player_shoot;
+    public AudioClip SE_player_hurt;
+    public AudioClip SE_player_death;
+    AudioSource audioSource;
 
     public float CuttentMoveSpeed { 
         get
@@ -122,6 +126,7 @@ public class player_controller : MonoBehaviour
         animator = GetComponent<Animator>();
         damageable=GetComponent<Damageable>();
         touchingSpaceDirection = GetComponent<TouchingSpaceDirection>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -227,6 +232,7 @@ public class player_controller : MonoBehaviour
             }
             ammo_wood--;
             Instantiate(woodPrefab, this.transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(SE_player_shoot);
         }
     }
     public void OnAttack02(InputAction.CallbackContext context)
@@ -244,6 +250,7 @@ public class player_controller : MonoBehaviour
             animator.SetTrigger(AnimationStrings.attackTrigger);
             ammo_stone--;
             Instantiate(stonePrefab, this.transform.position, Quaternion.identity);
+            audioSource.PlayOneShot(SE_player_shoot);
         }
     }
     public void OnCollisionEnter2D(Collision2D collision)
@@ -274,6 +281,7 @@ public class player_controller : MonoBehaviour
                 }
             }
             animator.SetTrigger("hurt");
+            audioSource.PlayOneShot(SE_player_hurt);
         }
         else if (collision.contacts[0].normal.x == 1&& (collision.gameObject.tag=="wc1"|| collision.gameObject.tag=="wc2"))//right
         {
@@ -301,6 +309,7 @@ public class player_controller : MonoBehaviour
                 }
             }
             animator.SetTrigger("hurt");
+            audioSource.PlayOneShot(SE_player_hurt);
         }
         else if(collision.contacts[0].normal.y >0)
         {
@@ -311,6 +320,7 @@ public class player_controller : MonoBehaviour
                 damageable.Hit(5);
                 //print(collision.contacts[0].normal.y+"YYYYYYYYYYYYYYYYYYYY");
                 animator.SetTrigger("hurt");
+                audioSource.PlayOneShot(SE_player_hurt);
             }
             if (collision.gameObject.tag == "wc2")
             {
@@ -318,6 +328,7 @@ public class player_controller : MonoBehaviour
                 //collision.gameObject.SendMessage("Apply", 10);
                 damageable.Hit(5);
                 animator.SetTrigger("hurt");
+                audioSource.PlayOneShot(SE_player_hurt);
             }
         }
 
