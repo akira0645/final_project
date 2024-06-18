@@ -1,4 +1,5 @@
-﻿[show]
+﻿[lock_attcak]
+[show]
 [image,bg3,forest_scene,0,0,0,spFadeIn_0]
 [image,char_oldman,oldman_256,-520,-30,1,spFadeIn_0]
 長老:[r]停下！快停下！[w]

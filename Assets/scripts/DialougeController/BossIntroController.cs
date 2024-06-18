@@ -24,6 +24,14 @@ public class BossIntro : MonoBehaviour
         fs.RegisterCommand("load_scene", (List<string> _params) => {
             SceneManager.LoadScene(_params[0]);
         });
+        fs.RegisterCommand("lock_attcak", (List<string> _params) => {
+            GameObject g = GameObject.Find("player");
+            g.GetComponent<player_controller>().canAttack = false;
+        });
+        fs.RegisterCommand("release_attcak", (List<string> _params) => {
+            GameObject g = GameObject.Find("player");
+            g.GetComponent<player_controller>().canAttack = true;
+        });
     }
 
     // Update is called once per frame

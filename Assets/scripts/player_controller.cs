@@ -134,7 +134,7 @@ public class player_controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
@@ -221,9 +221,10 @@ public class player_controller : MonoBehaviour
         }
     }
 
+    public bool canAttack = true;
     public void OnAttack01(InputAction.CallbackContext context)
     {
-        if(context.started&&ammo_wood>0)
+        if(context.started&&ammo_wood>0 && canAttack)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
             if (IsFacingRight)
@@ -241,7 +242,7 @@ public class player_controller : MonoBehaviour
     }
     public void OnAttack02(InputAction.CallbackContext context)
     {
-        if (context.started&&ammo_stone>0)
+        if (context.started&&ammo_stone>0 && canAttack)
         {
             if (IsFacingRight)
             {
@@ -415,9 +416,7 @@ public class player_controller : MonoBehaviour
         print("ryyy");
         if(collision.gameObject.tag =="portal")
         {
-            //SceneManager.LoadScene("BossIntro");
             collision.gameObject.transform.GetComponent<Transsport>().ChangeScene("BossIntro");
-            Destroy(this.gameObject);
         }
     }
 }
