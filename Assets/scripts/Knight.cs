@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingSpaceDirection))]
-public class woodcutter : MonoBehaviour
+public class Knight : MonoBehaviour
 {
     public float walkSpeed = 9f;
     Rigidbody2D rb;
@@ -93,6 +93,7 @@ public class woodcutter : MonoBehaviour
         hp_bar_bg.GetComponent<SpriteRenderer>().flipX = false;
         float pre = ((float)damageable.Health / (float)damageable.MaxHealth);
         hp_bar_bg.transform.localScale = new Vector3(pre, hp_bar_bg.transform.localScale.y, hp_bar_bg.transform.localScale.z);
+        
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {

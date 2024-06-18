@@ -12,6 +12,9 @@ TagManager:
   - ammo_stone
   - ammo_wood
   - player
+  - portal
+  - knight
+  - gift
   layers:
   - Default
   - TransparentFX

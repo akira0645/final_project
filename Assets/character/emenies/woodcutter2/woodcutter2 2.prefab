@@ -394,6 +394,7 @@ MonoBehaviour:
   hp_bar_bg: {fileID: 1347290033840848777}
   hp_bar: {fileID: 6311097614679383993}
   max_hp: 250
+  SE_player_shoot: {fileID: 8300000, guid: 1f674aa6778a5f848a56d68ee6948de1, type: 3}
 --- !u!82 &3955032102325867192
 AudioSource:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class FadeRemove : StateMachineBehaviour
     public float fadeTime = 0.5f;
     private float timeElapsed = 0f;
     GameObject objToRemove;
+    Transsport transsport;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -18,7 +19,12 @@ public class FadeRemove : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Debug.Log(objToRemove.name);
-        timeElapsed += Time.deltaTime;
+        if (objToRemove.name =="knight")
+        {
+            //changeScene
+            //objToRemove.transform.GetComponent<Transsport>().ChangeScene("gameplayScenes");
+        }
+            timeElapsed += Time.deltaTime;
         if (timeElapsed > fadeTime)
         {
             Destroy(objToRemove);

@@ -26,6 +26,7 @@ public class player_controller : MonoBehaviour
     public AudioClip SE_player_shoot;
     public AudioClip SE_player_hurt;
     public AudioClip SE_player_death;
+    public AudioClip SE_player_junp;
     AudioSource audioSource;
 
     public float CuttentMoveSpeed { 
@@ -132,7 +133,7 @@ public class player_controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
@@ -208,12 +209,14 @@ public class player_controller : MonoBehaviour
             jumpnum = 0;
             animator.SetTrigger(AnimationStrings.jumpTrigger);
             rb.velocity = new Vector2(rb.velocity.x, jumpImpuse);
+            audioSource.PlayOneShot(SE_player_junp);
         }
         if (context.started && !touchingSpaceDirection.IsGrounded && jumpnum!=1)
         {
             jumpnum++;
             animator.SetTrigger(AnimationStrings.jumpTrigger);
             rb.velocity = new Vector2(rb.velocity.x, jumpImpuse);
+            audioSource.PlayOneShot(SE_player_junp);
         }
     }
 
@@ -232,7 +235,7 @@ public class player_controller : MonoBehaviour
             }
             ammo_wood--;
             Instantiate(woodPrefab, this.transform.position, Quaternion.identity);
-            audioSource.PlayOneShot(SE_player_shoot);
+            //audioSource.PlayOneShot(SE_player_shoot);
         }
     }
     public void OnAttack02(InputAction.CallbackContext context)
@@ -250,13 +253,13 @@ public class player_controller : MonoBehaviour
             animator.SetTrigger(AnimationStrings.attackTrigger);
             ammo_stone--;
             Instantiate(stonePrefab, this.transform.position, Quaternion.identity);
-            audioSource.PlayOneShot(SE_player_shoot);
+            //audioSource.PlayOneShot(SE_player_shoot);
         }
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
         //enemy
-        if(collision.contacts[0].normal.x == -1 && (collision.gameObject.tag == "wc1" || collision.gameObject.tag == "wc2"))//left
+        if(collision.contacts[0].normal.x == -1 && (collision.gameObject.tag == "knight"||collision.gameObject.tag == "wc1" || collision.gameObject.tag == "wc2"))//left
         {
             if (collision.gameObject.tag == "wc1")
             {
@@ -280,10 +283,21 @@ public class player_controller : MonoBehaviour
                     // rb.AddForce(new Vector2(50, 50));
                 }
             }
+            if (collision.gameObject.tag == "knight")
+            {
+                print(collision.gameObject.name);
+                //collision.gameObject.SendMessage("Apply", 10);
+                damageable.Hit(20);
+                if (!touchingSpaceDirection.IsOnWall && !touchingSpaceDirection.TestingIsCelling(-2f))
+                {
+                    this.transform.position = new Vector3(transform.gameObject.transform.position.x - 2f, transform.position.y, transform.position.z);
+                    // rb.AddForce(new Vector2(50, 50));
+                }
+            }
             animator.SetTrigger("hurt");
             audioSource.PlayOneShot(SE_player_hurt);
         }
-        else if (collision.contacts[0].normal.x == 1&& (collision.gameObject.tag=="wc1"|| collision.gameObject.tag=="wc2"))//right
+        else if (collision.contacts[0].normal.x == 1&& (collision.gameObject.tag == "knight"||collision.gameObject.tag=="wc1"|| collision.gameObject.tag=="wc2"))//right
         {
             if (collision.gameObject.tag == "wc1")
             {
@@ -308,6 +322,17 @@ public class player_controller : MonoBehaviour
                     //rb.AddForce(new Vector2(50, 0));
                 }
             }
+            if (collision.gameObject.tag == "knight")
+            {
+                print(collision.gameObject.name);
+                //collision.gameObject.SendMessage("Apply", 10);
+                damageable.Hit(20);
+                if (!touchingSpaceDirection.IsOnWall && !touchingSpaceDirection.TestingIsCelling(-2f))
+                {
+                    this.transform.position = new Vector3(transform.gameObject.transform.position.x - 2f, transform.position.y, transform.position.z);
+                    // rb.AddForce(new Vector2(50, 50));
+                }
+            }
             animator.SetTrigger("hurt");
             audioSource.PlayOneShot(SE_player_hurt);
         }
@@ -328,6 +353,13 @@ public class player_controller : MonoBehaviour
                 //collision.gameObject.SendMessage("Apply", 10);
                 damageable.Hit(5);
                 animator.SetTrigger("hurt");
+                audioSource.PlayOneShot(SE_player_hurt);
+            }
+            if (collision.gameObject.tag == "knight")
+            {
+                print(collision.gameObject.name);
+                //collision.gameObject.SendMessage("Apply", 10);
+                damageable.Hit(20);
                 audioSource.PlayOneShot(SE_player_hurt);
             }
         }
@@ -361,11 +393,28 @@ public class player_controller : MonoBehaviour
         if (collision.gameObject.tag == "ammo_stone")
         {
             print(collision.gameObject.name);
-            ammo_stone+=5;
+            ammo_stone+=3;
+            animator.SetTrigger("getAmmo");
+            Destroy(collision.gameObject);
+            //collision.gameObject.SendMessage("Apply", 10);
+        }
+        if (collision.gameObject.tag == "gift")
+        {
+            print(collision.gameObject.name);
+            ammo_stone += 15;
+            ammo_wood += 50;
             animator.SetTrigger("getAmmo");
             Destroy(collision.gameObject);
             //collision.gameObject.SendMessage("Apply", 10);
         }
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("ryyy");
+        if(collision.gameObject.tag =="portal")
+        {
+            collision.gameObject.transform.GetComponent<Transsport>().ChangeScene("BossScenes");
+        }
+    }
 }

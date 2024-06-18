@@ -108,7 +108,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1fc12d33a9ddd294e82e17d8243063f6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -145,6 +145,7 @@ MonoBehaviour:
   SE_player_shoot: {fileID: 0}
   SE_player_hurt: {fileID: 0}
   SE_player_death: {fileID: 0}
+  SE_player_junp: {fileID: 0}
   _isMoving: 0
   _isRunning: 0
   _IsFacingRight: 1
@@ -404,6 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  SE_player_death: {fileID: 8300000, guid: b45bc6881c084b34e9a5c854e6b2fa42, type: 3}
   _isAlive: 1
   isInvincible: 0
   invincibilityTimer: 0.25
