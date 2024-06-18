@@ -17,6 +17,7 @@ public class FadeRemove : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Debug.Log(objToRemove.name);
         timeElapsed += Time.deltaTime;
         if (timeElapsed > fadeTime)
         {

@@ -8,6 +8,8 @@ public class Damageable : MonoBehaviour
     Animator animator;
     [SerializeField]
     private int _maxHealth=100;
+    public AudioClip SE_player_death;
+    AudioSource audioSource;
     public int MaxHealth
     {
         get
@@ -32,6 +34,8 @@ public class Damageable : MonoBehaviour
             _health = value;
             if(_health <= 0)
             {
+                audioSource.PlayOneShot(SE_player_death);
+                print("died");
                 IsAlive = false;
             }
         }
@@ -58,6 +62,7 @@ public class Damageable : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
