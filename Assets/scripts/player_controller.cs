@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 //player need to have rb
@@ -414,7 +415,8 @@ public class player_controller : MonoBehaviour
         print("ryyy");
         if(collision.gameObject.tag =="portal")
         {
-            collision.gameObject.transform.GetComponent<Transsport>().ChangeScene("BossScenes");
+            //collision.gameObject.transform.GetComponent<Transsport>().ChangeScene("BossIntro");
+            SceneManager.LoadScene("BossIntro");
         }
     }
 }

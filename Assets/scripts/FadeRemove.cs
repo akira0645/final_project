@@ -22,7 +22,7 @@ public class FadeRemove : StateMachineBehaviour
         if (objToRemove.name =="knight")
         {
             //changeScene
-            //objToRemove.transform.GetComponent<Transsport>().ChangeScene("gameplayScenes");
+            objToRemove.transform.GetComponent<Transsport>().ChangeScene("FinalScene");
         }
             timeElapsed += Time.deltaTime;
         if (timeElapsed > fadeTime)
