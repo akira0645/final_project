@@ -15,6 +15,7 @@ TagManager:
   - portal
   - knight
   - gift
+  - ammos
   layers:
   - Default
   - TransparentFX

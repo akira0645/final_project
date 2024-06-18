@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingSpaceDirection))]
 public class Knight : MonoBehaviour
@@ -13,7 +14,7 @@ public class Knight : MonoBehaviour
     public enum KnightState { Idle, Wait, Walk, Attack1, Attack2 };
     public KnightState state;
     private WalkableDirection _walkDirection;
-    private Vector2 WalkDirectionVector = Vector2.right;
+    public Vector2 WalkDirectionVector = Vector2.right;
     TouchingSpaceDirection touchingSpaceDirections;
     Damageable damageable;
     public GameObject hp_bar_bg;
@@ -22,6 +23,60 @@ public class Knight : MonoBehaviour
     Animator animator;
     public AudioClip SE_player_shoot;
     AudioSource audioSource;
+    public GameObject sw1;
+    public GameObject sw2A;
+    public GameObject sw2B;
+    public GameObject sw2C;
+    public GameObject sw2D;
+
+    [SerializeField]
+    private bool _walkLock;
+
+    public bool walkLock
+    {
+        get
+        {
+            return _walkLock;
+        }
+        private set
+        {
+            _walkLock = value;
+            animator.SetBool("walkLock", value);
+        }
+    }
+
+    [SerializeField]
+    private bool _Onattack1;
+
+    public bool Onattack1
+    {
+        get
+        {
+            return _Onattack1;
+        }
+        private set
+        {
+            _Onattack1 = value;
+            animator.SetBool("Onattack1", value);
+        }
+    }
+
+    [SerializeField]
+    private bool _Onattack2;
+
+    public bool Onattack2
+    {
+        get
+        {
+            return _Onattack2;
+        }
+        private set
+        {
+            _Onattack2 = value;
+            animator.SetBool("Onattack2", value);
+        }
+    }
+
     public WalkableDirection WalkDirection
     {
         get { return _walkDirection; }
@@ -58,11 +113,19 @@ public class Knight : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (touchingSpaceDirections.IsOnWall && touchingSpaceDirections.IsGrounded)
+        if(!walkLock)
         {
-            FilpDirection();
+            if (touchingSpaceDirections.IsOnWall && touchingSpaceDirections.IsGrounded)
+            {
+                FilpDirection();
+            }
+            rb.velocity = new Vector2(walkSpeed * WalkDirectionVector.x, rb.velocity.y);
         }
-        rb.velocity = new Vector2(walkSpeed * WalkDirectionVector.x, rb.velocity.y);
+        else
+        {
+            rb.velocity = new Vector2(0f, 0f);
+        }
+            
     }
 
     private void FilpDirection()
@@ -85,7 +148,71 @@ public class Knight : MonoBehaviour
     void Start()
     {
         damageable.SetHealth(max_hp);
+        InvokeRepeating("startOnAttack01", 2f, 30f);
+        InvokeRepeating("OnAttack01", 5f, 30f);
+        InvokeRepeating("OnAttack01c", 10, 30f);
+        InvokeRepeating("endOnAttack01", 11f, 30f);
+
+        InvokeRepeating("startOnAttack02", 15f, 30f);
+        InvokeRepeating("OnAttack02", 18f, 30f);
+        InvokeRepeating("OnAttack021", 18.5f, 30f);
+        InvokeRepeating("OnAttack02c", 23, 30f);
+        InvokeRepeating("endOnAttack02", 24f, 30f);
     }
+
+    void startOnAttack01()
+    {
+        Onattack1 = true;
+        walkLock = true;
+
+    }
+     void OnAttack01()
+    {
+        sw1.GetComponent<BulletSpawner>().SetLocker();
+
+    }
+    void OnAttack01c()
+    {
+        sw1.GetComponent<BulletSpawner>().Lock();
+    }
+    void endOnAttack01()
+    {
+        Onattack1 = false;
+        walkLock = false;
+
+    }
+
+    void startOnAttack02()
+    {
+        Onattack2 = true;
+        walkLock = true;
+
+    }
+    void OnAttack02()
+    {
+        sw2A.GetComponent<BulletSpawner>().SetLocker();
+        sw2B.GetComponent<BulletSpawner>().SetLocker();
+
+    }
+    void  OnAttack021()
+    {
+        sw2C.GetComponent<BulletSpawner>().SetLocker();
+        sw2D.GetComponent<BulletSpawner>().SetLocker();
+    }
+    void OnAttack02c()
+    {
+        sw2A.GetComponent<BulletSpawner>().Lock();
+        sw2B.GetComponent<BulletSpawner>().Lock();
+        sw2C.GetComponent<BulletSpawner>().Lock();
+        sw2D.GetComponent<BulletSpawner>().Lock();
+    }
+    void endOnAttack02()
+    {
+        Onattack2 = false;
+        walkLock = false;
+
+    }
+
 
     // Update is called once per frame
     void Update()

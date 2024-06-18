@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //player need to have rb
 [RequireComponent(typeof(Rigidbody2D),typeof(TouchingSpaceDirection),typeof(AudioSource))]
 
 public class player_controller : MonoBehaviour
 {
-    public float walkSpeed = 5f;
+    public float walkSpeed = 6f;
     public float runSpeed = 9f;
-    public float jumpImpuse=7f;
+    public float jumpImpuse=10f;
     public int jumpnum = 0;
     Vector2 moveInput;
     TouchingSpaceDirection touchingSpaceDirection;
@@ -139,10 +140,35 @@ public class player_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //print(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name == "gameplayScenes"|| SceneManager.GetActiveScene().name == "BossScenes")
+        {
+            //gameObject.transform.position = new Vector3(3.93f, -2.93f, 0f);
+            //rb.constraints = RigidbodyConstraints2D.None;
+            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            print(SceneManager.GetActiveScene().name);
+            //gameObject.transform.position = new Vector3(3.93f, -2.93f, 0f);
+            gameObject.GetComponent<PlayerInput>().enabled = true;
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else
+        {
+            //rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            print(SceneManager.GetActiveScene().name);
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.GetComponent<PlayerInput>().enabled = false;
+        }
+        print(CuttentMoveSpeed + "WERWer rWER");
+        woods.text = "" + ammo_wood;
+        stones.text = "" + ammo_stone;
+        float pre = ((float)damageable.Health / (float)damageable.MaxHealth);
+        hp_bar.transform.localScale = new Vector3(pre, hp_bar.transform.localScale.y, hp_bar.transform.localScale.z);
+        rb.velocity = new Vector2(moveInput.x * CuttentMoveSpeed, rb.velocity.y);
+        animator.SetFloat(AnimationStrings.yVelocity, rb.velocity.y);
     }
     private void FixedUpdate()
     {
+        print(CuttentMoveSpeed + "WERWer rWER");
         woods.text =""+ ammo_wood;
         stones.text =""+ ammo_stone;
         float pre = ((float)damageable.Health / (float)damageable.MaxHealth);
@@ -377,6 +403,7 @@ public class player_controller : MonoBehaviour
             }
             else
             {
+                damageable.SetHealth(damageable.MaxHealth);
                 print("healthFull");
             }
             Destroy(collision.gameObject);
@@ -414,7 +441,14 @@ public class player_controller : MonoBehaviour
         print("ryyy");
         if(collision.gameObject.tag =="portal")
         {
-            collision.gameObject.transform.GetComponent<Transsport>().ChangeScene("BossScenes");
+            collision.gameObject.transform.GetComponent<Transsport>().ChangeScene("BossIntro");
+        }
+        if (collision.gameObject.tag == "ammos")
+        {
+            print(collision.gameObject.name);
+            damageable.Hit(1);
+            animator.SetTrigger("hurt");
+            audioSource.PlayOneShot(SE_player_hurt);
         }
     }
 }

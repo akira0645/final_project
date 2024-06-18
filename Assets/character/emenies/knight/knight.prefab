@@ -97,7 +97,6 @@ GameObject:
   - component: {fileID: 1191286495150429604}
   - component: {fileID: 5083026702688414259}
   - component: {fileID: 4012104752997477152}
-  - component: {fileID: 2217098270820959800}
   - component: {fileID: 2989890758282599657}
   - component: {fileID: 1148005462148482145}
   - component: {fileID: 8356834345280873741}
@@ -242,24 +241,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0022844316, y: 0.018704463}
   m_Size: {x: 0.2475216, y: 0.66403913}
   m_Direction: 0
---- !u!114 &2217098270820959800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1893236728883950399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4478af9fc76982e4a86ddf2a46a01371, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 4
-  state: 0
-  hp_bar_bg: {fileID: 6605668890028511248}
-  hp_bar: {fileID: 1789983768967019262}
-  max_hp: 500
-  SE_player_shoot: {fileID: 0}
 --- !u!114 &2989890758282599657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,10 +326,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 9
   state: 0
+  WalkDirectionVector: {x: 1, y: 0}
   hp_bar_bg: {fileID: 6605668890028511248}
   hp_bar: {fileID: 1789983768967019262}
   max_hp: 800
   SE_player_shoot: {fileID: 8300000, guid: 1f674aa6778a5f848a56d68ee6948de1, type: 3}
+  sw1: {fileID: 0}
+  walkLock: 0
 --- !u!82 &9084328755685963248
 AudioSource:
   m_ObjectHideFlags: 0
