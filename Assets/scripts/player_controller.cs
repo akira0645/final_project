@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -246,9 +247,10 @@ public class player_controller : MonoBehaviour
         }
     }
 
+    public bool canAttack = true;
     public void OnAttack01(InputAction.CallbackContext context)
     {
-        if(context.started&&ammo_wood>0)
+        if(context.started&&ammo_wood>0 && canAttack)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
             if (IsFacingRight)
@@ -266,7 +268,7 @@ public class player_controller : MonoBehaviour
     }
     public void OnAttack02(InputAction.CallbackContext context)
     {
-        if (context.started&&ammo_stone>0)
+        if (context.started&&ammo_stone>0 && canAttack)
         {
             if (IsFacingRight)
             {

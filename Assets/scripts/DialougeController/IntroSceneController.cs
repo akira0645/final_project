@@ -10,7 +10,7 @@ public class Intro : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fs = FlowerManager.Instance.CreateFlowerSystem("lk", false);
+        fs = FlowerManager.Instance.CreateFlowerSystem("kl", false);
         fs.SetupDialog();
         fs.ReadTextFromResource("Intro");
         fs.RegisterCommand("load_scene", (List<string> _params) => {
